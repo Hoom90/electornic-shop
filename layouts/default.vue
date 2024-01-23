@@ -1,8 +1,7 @@
 <template>
   <div>
-    2
+    <headerComp/>
     <slot />
-    3
   </div>
 </template>
 
