@@ -46,7 +46,7 @@ const currentIndex = ref(0);
 const slider = ref(null)
 const slide = (index) => {
   currentIndex.value = index;
-  slider.value.style.transform = `translateX(${index * -25}%)`;
+  slider.value.style.transform = `translateX(${index * -20}%)`;
 };
 
 const nextSlide = () => {
@@ -56,31 +56,31 @@ const nextSlide = () => {
   } else {
     let index = currentIndex.value
     currentIndex.value++;
-    slider.value.style.transform = `translateX(${(index + 1) * -25}%)`;
+    slider.value.style.transform = `translateX(${(index + 1) * -20}%)`;
   }
 };
 
 const previousSlide = () => {
   if(currentIndex.value <= 0){
     currentIndex.value = state.slides.length-1;
-    slider.value.style.transform = `translateX(${(state.slides.length-1) * -25}%)`;
+    slider.value.style.transform = `translateX(${(state.slides.length-1) * -20}%)`;
   }
   else{
     let index = currentIndex.value
     currentIndex.value--;
-    slider.value.style.transform = `translateX(${(index-1) * -25}%)`;
+    slider.value.style.transform = `translateX(${(index-1) * -20}%)`;
   }
 };
 onMounted(() => {
   // Automatic sliding
-  // setInterval(() => {
-  //   if (currentIndex.value === state.slides.length - 1) {
-  //     currentIndex.value = 0;
-  //   } else {
-  //     currentIndex.value++;
-  //   }
-  //   slide(currentIndex.value);
-  // }, 5000);
+  setInterval(() => {
+    if (currentIndex.value === state.slides.length - 1) {
+      currentIndex.value = 0;
+    } else {
+      currentIndex.value++;
+    }
+    slide(currentIndex.value);
+  }, 5000);
 });
 </script>
 
@@ -91,9 +91,9 @@ onMounted(() => {
       <!--  slider -->
       <div class="h-[500px] w-full relative">
         <div class="w-full relative h-full overflow-hidden rounded-md">
-          <div class="absolute h-full flex flex-row-reverse transition-all ease-in-out duration-[0.5s]" :class="`w-[calc(100%*${state.slides.length})]`" ref="slider">
+          <div class="absolute h-full flex flex-row-reverse transition-all ease-in-out duration-[0.5s] w-[500%]" ref="slider">
 
-            <div class=" h-full flex justify-start items-center" :class="`w-[calc(100%/${state.slides.length})]`" v-for="item in state.slides" :key="item.id">
+            <div class=" h-full flex justify-start items-center" :class="`w-1/${state.slides.length}`" v-for="item in state.slides" :key="item.id">
               <div class="flex-row justify-start items-center w-1/2 pl-20">
                 <p>{{ item.title }}</p>
                 <p>{{ item.summary }}</p>
