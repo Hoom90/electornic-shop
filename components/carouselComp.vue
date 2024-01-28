@@ -1,4 +1,6 @@
 <script setup>
+import left from "@/assets/svg/arrow-sm-left.svg"
+import right from "@/assets/svg/arrow-sm-right.svg"
 const props = defineProps(['data'])
 const currentIndex = ref(0);
 const slider = ref(null)
@@ -59,7 +61,7 @@ onMounted(() => {
             <p>{{ item.description }}</p>
           </div>
           <div class="flex justify-center items-center h-full w-1/2">
-            <img class="h-full object-contain" :src="item.image" alt="Image">
+            <img class="h-full object-contain" :src="item.image" :alt="item.image">
           </div>
         </div>
       </div>
@@ -68,8 +70,8 @@ onMounted(() => {
       <div class="dot" v-for="(dot,index) in props.data" :key="index" @click="slide(index)" :class="{ active: currentIndex === index }"></div>
     </div>
     <div class="w-[98%] flex justify-between items-center gap-10 absolute top-[50%] left-[1%] translate-y-[-50%]">
-      <button @click="previousSlide" class="border bg-white w-[50px] aspect-square rounded-full">back</button>
-      <button @click="nextSlide" class="border bg-white w-[50px] aspect-square rounded-full">next</button>
+      <button @click="previousSlide" class="border bg-white w-[50px] aspect-square rounded-full flex justify-center items-center"><img :src="left" alt="left"></button>
+      <button @click="nextSlide" class="border bg-white w-[50px] aspect-square rounded-full flex justify-center items-center"><img :src="right" alt="right"></button>
     </div>
   </div>
 </template>
