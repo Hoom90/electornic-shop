@@ -23,19 +23,21 @@ const state = reactive({
   <div class="flex justify-between items-center mx-auto max-w-[1440px] p-5 bg-white">
     
     <div class="flex justify-center items-center gap-3">
-      <img :src="telegram" alt="telegram">
-      <img :src="linkedin" alt="linkedin">
-      <img :src="youtube" alt="youtube">
-      <img :src="instagram" alt="instagram">
+      <a href="#">
+        <img :src="telegram" alt="telegram">
+      </a>
+      <a href="#">
+        <img :src="linkedin" alt="linkedin">
+      </a>
+      <a href="#">
+        <img :src="youtube" alt="youtube">
+      </a>
+      <a href="#">
+        <img :src="instagram" alt="instagram">
+      </a>
     </div>
 
-    <div>
-      <select>
-        <option value="en">
-          <img :src="cart" alt="cart"><span>English</span>
-        </option>
-      </select>
-    </div>
+    <langSelectComp/> 
 
   </div>
   <hr>
@@ -112,3 +114,5 @@ const state = reactive({
     </div>
   </div>
 </template>
+<style scoped>
+</style>
