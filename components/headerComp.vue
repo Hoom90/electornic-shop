@@ -17,6 +17,41 @@ const state = reactive({
   logedin:false,
 })
 
+const selectBox = reactive({
+  data:[
+    {
+      id:1,
+      title:'All Categories',
+    },
+    {
+      id:2,
+      title:'Sony',
+    },
+  ],
+  value:'All Categories',
+  arrow: arrowDown,
+  isOpen: false,
+})
+
+const changeSelectBox = (id) => {
+  selectBox.value = selectBox.data.find(item => item.id == id).title
+}
+
+const openSelectBox = () => {
+  if (selectBox.isOpen) {
+    closeSelectBox()
+  }
+  else {
+    selectBox.arrow = arrowUp
+    selectBox.isOpen = !selectBox.isOpen
+  }
+}
+
+const closeSelectBox = () => {
+  selectBox.arrow = arrowDown
+  selectBox.isOpen = false
+}
+
 </script>
 
 <template>
@@ -37,7 +72,7 @@ const state = reactive({
       </a>
     </div>
 
-    <langSelectComp/> 
+    <langSelectComp/>
 
   </div>
   <hr>
@@ -62,12 +97,17 @@ const state = reactive({
       <div class="flex justify-center items-center h-full">
 
         <div class="flex justify-center items-center rounded bg-[#eee] h-full px-5">
-          <div class="">
-            <input type="text" placeholder="Search something ..." class="bg-transparent tracking-tighter outline-none">
-          </div>
-          <select class="bg-transparent cursor-pointer font-bold">
-            <option value="All">All Categories</option>
-          </select>
+          <input type="text" placeholder="Search something ..." class="bg-transparent tracking-tighter outline-none">
+          <button type="button" class="flex justify-center items-center cursor-pointer font-bold outline-none relative" @click="openSelectBox">
+            <span>{{ selectBox.value }}</span>
+            <img :src="selectBox.arrow" :alt="selectBox.arrow">
+            <ul v-if="selectBox.isOpen" class="absolute top-9 w-max border bg-white rounded-b p-1 px-3 z-10">
+              <li class="flex justify-start items-center gap-2" @click="changeSelectBox(item.id)"
+                v-for="(item, index) in selectBox.data" :key="index">
+                <img :src="item.thumbnail" :alt="item.short"><span>{{ item.title }}</span>
+              </li>
+            </ul>
+          </button>
         </div>
 
         <button type="button" class="bg-[#232b36] h-full px-4 rounded">
