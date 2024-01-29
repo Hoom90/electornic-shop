@@ -25,7 +25,7 @@ const selectBox = reactive({
   isOpen: false,
 })
 
-const changeLang = (id) => {
+const changeSelectBox = (id) => {
   if (id == 1) {
     selectBox.lang = 'en'
     selectBox.image = en
@@ -38,9 +38,9 @@ const changeLang = (id) => {
   }
 }
 
-const openLang = () => {
+const openSelectBox = () => {
   if (selectBox.isOpen) {
-    closeLang()
+    closeSelectBox()
   }
   else {
     selectBox.arrow = arrowUp
@@ -48,20 +48,20 @@ const openLang = () => {
   }
 }
 
-const closeLang = () => {
+const closeSelectBox = () => {
   selectBox.arrow = arrowDown
   selectBox.isOpen = false
 }
 </script>
 
 <template>
-  <button type="button" class="flex gap-1 justify-center items-center relative" @blur="closeLang" @click="openLang">
+  <button type="button" class="flex gap-1 justify-center items-center relative" @blur="closeSelectBox" @click="openSelectBox">
     <img :src="selectBox.image" :alt="selectBox.lang">
     <span>{{ selectBox.value }}</span>
     <img :src="selectBox.arrow" :alt="selectBox.arrow">
 
     <ul v-if="selectBox.isOpen" class="absolute top-8 w-max border bg-white rounded-b p-1 px-3">
-      <li class="flex justify-start items-center gap-2" @click="changeLang(item.id)"
+      <li class="flex justify-start items-center gap-2" @click="changeSelectBox(item.id)"
         v-for="(item, index) in selectBox.data" :key="index">
         <img :src="item.thumbnail" :alt="item.short"><span>{{ item.title }}</span>
       </li>
