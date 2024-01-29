@@ -14,6 +14,7 @@ import image1 from "@/assets/image/new-laptop-balancing-with-water_23-2150296463
 import image2 from "@/assets/image/new-smartphone-balancing-with-leaves_23-2150296479.jpg"
 import image3 from "@/assets/image/new-smartwatch-balancing-with-cliff_23-2150296475.jpg"
 import image4 from "@/assets/image/white-headphones_93675-133847.jpg"
+import TopProduct from "@/assets/image/new-laptop.png"
 import truck from "@/assets/svg/truck.svg"
 import card from "@/assets/svg/card.svg"
 import headphone from "@/assets/svg/headphone.svg"
@@ -161,7 +162,7 @@ const addToFav = (id) =>{
 <template>
 
   <section>
-    <div class="bg-gray-300">
+    <div class="bg-gray-100">
       <carouselComp :data="state.slides"></carouselComp>
     </div>
     <div class="flex items-center justify-around p-10">
@@ -221,7 +222,35 @@ const addToFav = (id) =>{
       </div>
     </div>
   </section>
-  <section class="bg-gray-300 h-[500px]">Top Product</section>
+
+  <section class="p-10 mb-20">
+    <div class="p-5">
+      <div class="flex justify-center gap-10 bg-[#e6f1f8] rounded p-10">
+        <img :src="TopProduct" alt="TopProduct">
+        <div class="mt-0">
+          <p class="text-emerald-500 font-bold text-[12px]">FLASH SALE 7.7.7</p>
+          <p class="font-bold text-[30px] my-5">Lenovo Yoga X</p>
+          <p class="text-gray-500">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
+          </p>
+          <div class=" mt-5 flex justify-start items-center gap-1">
+              <button type="button" class="flex justify-center items-center gap-1 bg-blue-600 rounded p-1 px-10 text-white hover:bg-blue-700 transition-all">
+                <img :src="cart" alt="cart">
+                <p>Add to cart</p>
+              </button>
+              <button type="button" class="flex justify-center items-center gap-1 border rounded p-1 px-10 bg-white text-gray-400 hover:border-gray-400">
+                <img :src="eye" alt="eye">
+                <p>Quick view</p>  
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
