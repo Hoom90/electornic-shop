@@ -26,16 +26,10 @@ const selectBox = reactive({
 })
 
 const changeSelectBox = (id) => {
-  if (id == 1) {
-    selectBox.lang = 'en'
-    selectBox.image = en
-    selectBox.value = 'English (US)'
-  }
-  if (id == 2) {
-    selectBox.lang = 'fa'
-    selectBox.image = fa
-    selectBox.value = 'فارسی (IR)'
-  }
+  let temp = selectBox.data.find(item => item.id == id)
+  selectBox.value = temp.title
+  selectBox.image = temp.thumbnail
+  selectBox.lang = temp.short
 }
 
 const openSelectBox = () => {
