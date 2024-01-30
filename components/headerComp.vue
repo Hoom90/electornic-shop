@@ -1,7 +1,6 @@
 <script setup>
 import arrowUp from "@/assets/svg/arrowup.svg"
 import arrowDown from "@/assets/svg/arrowdown.svg"
-import magnifier from "@/assets/svg/magnifier.svg"
 import search from "@/assets/svg/search.svg"
 import cart from "@/assets/svg/cart.svg"
 import favovite from "@/assets/svg/heart.svg"
@@ -12,28 +11,87 @@ import linkedin from "@/assets/svg/linkedin.svg"
 import youtube from "@/assets/svg/youtube.svg"
 import logo from "@/assets/svg/logo.svg"
 import menu from "@/assets/svg/hamburgerMenu.svg"
+import home from "@/assets/svg/home.svg"
+import chat from "@/assets/svg/chat.svg"
+import product from "@/assets/svg/monitor-smartphone.svg"
+import about from "@/assets/svg/medal-star-circle.svg"
+import { routerKey } from "vue-router"
 
+const route = useRoute()
+const router = useRouter()
+
+const sidebar = ref()
+const overLay = ref()
 const state = reactive({
   logedin:false,
+  isSidebarOpen:false,
 })
+
+const social = reactive({
+  telegram:{
+    title:'telegram',
+    image:telegram
+  },
+  linkedin:{
+    title:'linkedin',
+    image:linkedin
+  },
+  youtube:{
+    title:'youtube',
+    image:youtube
+  },
+  instagram:{
+    title:'instagram',
+    image:instagram
+  },
+})
+
+const sidebarLinks = reactive({
+  home:{
+    title:'Home',
+    image:home,
+    link:'/',
+  },
+  product:{
+    title:'Product',
+    image:product,
+    link:'/product',
+  },
+  contact:{
+    title:'Contact',
+    image:chat,
+    link:'/contact',
+  },
+  about:{
+    title:'About',
+    image:about,
+    link:'/about',
+  },
+})
+
+const openSidebar = () =>{
+  overLay.value.classList.replace('invisible','visible')
+  sidebar.value.classList.replace('translate-x-[-250px]','translate-x-0')
+}
+
+const closeSidebar = () =>{
+  overLay.value.classList.replace('visible','invisible')
+  sidebar.value.classList.replace('translate-x-0','translate-x-[-250px]')
+}
+
+const redirectToLogin = () =>{
+  router.push('/auth/login')
+}
 
 </script>
 
 <template>
+  <!-- page head -->
   <div class="flex justify-between items-center mx-auto max-w-[1440px] p-5 bg-white">
     
     <div class="flex justify-center items-center gap-3">
-      <a href="#">
-        <img :src="telegram" alt="telegram">
-      </a>
-      <a href="#">
-        <img :src="linkedin" alt="linkedin">
-      </a>
-      <a href="#">
-        <img :src="youtube" alt="youtube">
-      </a>
-      <a href="#">
-        <img :src="instagram" alt="instagram">
+      <a href="#" v-for="item in social">
+        <img :src="item.image" :alt="item.title">
       </a>
     </div>
 
@@ -45,18 +103,10 @@ const state = reactive({
     <div class="flex justify-between h-[50px]">
 
       <div class="flex justify-center items-center gap-5 h-full">
-
-        <button type="button" class="grid gap-1">
-          <img :src="menu" alt="menu">
-          <!-- <div class="bg-[#6b72c6] w-5 h-[2px] rounded"></div>
-          <div class="bg-[#6b72c6] w-4 h-[2px] rounded"></div>
-          <div class="bg-[#6b72c6] w-5 h-[2px] rounded"></div> -->
-        </button>
-
+        <img :src="menu" alt="menu" class="cursor-pointer" @click="openSidebar">
         <NuxtLink to="/">
           <img :src="logo" alt="logo" class="max-w-[100px]">
         </NuxtLink>
-
       </div>
 
       <div class="flex justify-center items-center h-full">
@@ -100,7 +150,7 @@ const state = reactive({
         </div>
 
         <div class="flex justify-center items-center gap-3 h-full" v-else>
-          <button type="button" class="border rounded h-full px-3" @click="state.logedin = !state.logedin">
+          <button type="button" class="border rounded h-full px-3" @click="redirectToLogin">
             signup/login
           </button>
         </div>
@@ -109,6 +159,20 @@ const state = reactive({
 
     </div>
   </div>
+
+  <!-- sidebar -->
+  <div ref="overLay" class="invisible absolute top-0 left-0 bg-[#ffffff00] z-10 w-full h-full" @click="closeSidebar">
+    <div ref="sidebar" class="w-[250px] h-full bg-[#6067c2] translate-x-[-250px] transition-all">
+      <div class="flex justify-center items-center p-5">
+        <NuxtLink to="/">
+          <img :src="logo" alt="logo" class="max-w-[100px]">
+        </NuxtLink>
+      </div>
+      <div class="w-full h-[1px] bg-white "></div>
+      <NuxtLink :to="item.link" class="flex items-center gap-10 w-full hover:bg-[#6e74c5] px-5 p-1 text-white" :active-class="route.path == item.link ? 'bg-[#6e74c5] hover:bg-[#3640c5]' : ''" v-for="item in sidebarLinks">
+        <img :src="item.image" :alt="item.title" class="">
+        <span class="w-1/2 text-end">{{item.title}}</span>
+      </NuxtLink>
+    </div>
+  </div>
 </template>
-<style scoped>
-</style>
