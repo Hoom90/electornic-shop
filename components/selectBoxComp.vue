@@ -1,35 +1,24 @@
 <script setup>
-import en from "@/assets/svg/en.svg"
-import fa from "@/assets/svg/fa.svg"
 import arrowUp from "@/assets/svg/arrowup.svg"
 import arrowDown from "@/assets/svg/arrowdown.svg"
 const selectBox = reactive({
-  data: [
+  data:[
     {
-      id: 1,
-      title: 'English (US)',
-      short: 'en',
-      thumbnail: en,
+      id:1,
+      title:'All Categories',
     },
     {
-      id: 2,
-      title: 'فارسی (IR)',
-      short: 'fa',
-      thumbnail: fa,
+      id:2,
+      title:'Sony',
     },
   ],
-  value: 'English (US)',
-  lang: 'en',
-  image: en,
+  value:'All Categories',
   arrow: arrowDown,
   isOpen: false,
 })
 
 const changeSelectBox = (id) => {
-  let temp = selectBox.data.find(item => item.id == id)
-  selectBox.value = temp.title
-  selectBox.image = temp.thumbnail
-  selectBox.lang = temp.short
+  selectBox.value = selectBox.data.find(item => item.id == id).title
 }
 
 const openSelectBox = () => {
@@ -49,12 +38,10 @@ const closeSelectBox = () => {
 </script>
 
 <template>
-  <button type="button" class="flex gap-1 justify-center items-center relative outline-none" @blur="closeSelectBox" @click="openSelectBox">
-    <img :src="selectBox.image" :alt="selectBox.lang">
+  <button type="button" class="flex justify-center items-center cursor-pointer font-bold outline-none relative" @blur="closeSelectBox" @click="openSelectBox">
     <span>{{ selectBox.value }}</span>
     <img :src="selectBox.arrow" :alt="selectBox.arrow">
-
-    <ul v-if="selectBox.isOpen" class="absolute top-8 w-max border bg-white rounded-b p-1 px-3">
+    <ul v-if="selectBox.isOpen" class="absolute top-9 w-max border bg-white rounded-b p-1 px-3 z-10">
       <li class="flex justify-start items-center gap-2" @click="changeSelectBox(item.id)"
         v-for="(item, index) in selectBox.data" :key="index">
         <img :src="item.thumbnail" :alt="item.short"><span>{{ item.title }}</span>
@@ -62,3 +49,7 @@ const closeSelectBox = () => {
     </ul>
   </button>
 </template>
+
+<style>
+
+</style>
