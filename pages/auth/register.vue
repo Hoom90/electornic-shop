@@ -1,7 +1,6 @@
 <script setup>
 import hero from "@/assets/svg/registerHero.svg"
 const router = useRouter()
-const userStore = UserStore()
 const newUser = reactive({
   firstName:'',
   lastName:'',
@@ -9,15 +8,19 @@ const newUser = reactive({
   password:'',
 })
 
+onMounted(()=>{
+  if(localStorage.getItem('token')){
+    router.push('/')
+  }
+})
+
 const redirectToLogin = () =>{
   router.push('/auth/login')
 }
 
 const register = () =>{
-  userStore.setProfile(newUser)
-  userStore.setRoles('User')
-  userStore.setToken('TestishToken')
   localStorage.setItem('token','TestishToken')
+  localStorage.setItem('user',JSON.stringify(newUser))
   router.push('/')
 }
 </script>
@@ -55,8 +58,3 @@ const register = () =>{
     </div>
   </div>
 </template>
-
-
-<style>
-
-</style>
