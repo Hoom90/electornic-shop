@@ -16,7 +16,7 @@ onMounted(()=>{
 
 const validate = () =>{
   if(props.hasRule){
-    if(!text.value){
+    if(text.value.length <= 0){
       error.value.classList.replace('opacity-0','opacity-1')
       container.value.classList.replace('border-gray-300','border-red-500')
       container.value.classList.replace('mb-0','mb-10')
