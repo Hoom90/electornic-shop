@@ -15,11 +15,10 @@ import home from "@/assets/svg/home.svg"
 import chat from "@/assets/svg/chat.svg"
 import product from "@/assets/svg/monitor-smartphone.svg"
 import about from "@/assets/svg/medal-star-circle.svg"
-import { routerKey } from "vue-router"
-
+import exit from "@/assets/svg/exit.svg"
 const route = useRoute()
 const router = useRouter()
-
+const userStore = UserStore()
 const sidebar = ref()
 const overLay = ref()
 const state = reactive({
@@ -69,6 +68,19 @@ const sidebarLinks = reactive({
   },
 })
 
+// watch(()=>userStore.getToken,()=>{
+//   console.log('hi');
+//   // if(localStorage.getItem('token')){
+//   //   state.logedin = true
+//   // }
+// })
+
+onMounted(()=>{
+  if(localStorage.getItem('token')){
+    state.logedin = true
+  }
+})
+
 const openSidebar = () =>{
   overLay.value.classList.replace('invisible','visible')
   sidebar.value.classList.replace('translate-x-[-250px]','translate-x-0')
@@ -82,6 +94,12 @@ const closeSidebar = () =>{
 const redirectToLogin = () =>{
   router.push('/auth/login')
 }
+
+const logout = () =>{
+  localStorage.clear()
+  state.logedin = false
+}
+
 
 </script>
 
@@ -140,11 +158,15 @@ const redirectToLogin = () =>{
             <span v-if="state.user" class="bg-[#f00] w-2 h-2 rounded-full absolute -top-0 -right-0"></span>
           </button>
 
-          <button type="button" class="w-full" @click="state.logedin = !state.logedin">
+          <button type="button" class="w-full relative" @click="">
             <div class="text-[#aaa] w-full text-start">Mohammad Mahdavi</div>
             <div class="flex justify-start items-center">
               <span class="font-bold">My Account</span>
               <span><img :src="arrowDown" alt="arrowDown"></span> 
+            </div>
+
+            <div class="absolute top-14 left-0 bg-white shadow w-full border z-10 rounded gap-5">
+              <button type="button" class="hover:bg-gray-300 w-full p-3 px-5 flex gap-1 justify-start items-center" @click="logout"><img :src="exit" alt="exit">Logout</button>
             </div>
           </button>
         </div>
