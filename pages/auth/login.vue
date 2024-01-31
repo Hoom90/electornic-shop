@@ -1,6 +1,6 @@
 <script setup>
 import hero from "@/assets/svg/registerHero.svg"
-
+const userStore = userStore()
 const router = useRouter()
 
 const redirectToForgetPass = () =>{
@@ -9,6 +9,13 @@ const redirectToForgetPass = () =>{
 
 const redirectToRegister = () =>{
   router.push('/auth/register')
+}
+
+const login = () =>{
+  userStore.setRoles('User')
+  userStore.setToken('TestishToken')
+  localStorage.setItem('token','TestishToken')
+  router.push('/')
 }
 </script>
 
@@ -32,7 +39,7 @@ const redirectToRegister = () =>{
             <button type="button" @click="redirectToForgetPass">Forgot Password?</button>
           </div>
           <div class="flex justify-center items-center gap-3 my-5">
-            <button class="p-1 bg-[#4951c2] text-white hover:bg-[#5c63c7] transition-all w-2/3 border border-[#4951c2] h-[40px]">Login</button>
+            <button class="p-1 bg-[#4951c2] text-white hover:bg-[#5c63c7] transition-all w-2/3 border border-[#4951c2] h-[40px]" @click="login">Login</button>
             <button class="p-1 border border-[#4951c2] text-[#4951c2] hover:bg-[#4951c2] hover:text-white transition-all w-1/3 h-[40px]" @click="redirectToRegister">Signup</button>
           </div>
           <div class="relative">
