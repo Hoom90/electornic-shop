@@ -11,4 +11,13 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules:[
+    '@pinia/nuxt',
+  ],
+  pinia: {
+    storesDirs: ['./stores/**',
+      'stores',
+      'stores/*/index.{ts,js,mjs,mts}',
+      'stores/**'],
+  },
 })
