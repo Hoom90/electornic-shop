@@ -1,37 +1,53 @@
 <script setup>
-import hero from "@/assets/svg/registerHero.svg"
-const userStore = userStore()
+import hero from "@/assets/svg/loginHero.svg"
+import arrowRight from "@/assets/svg/arrow-sm-right.svg"
 const router = useRouter()
+const container = ref()
+onMounted(()=>{
+  if(localStorage.getItem('token')){
+    router.push('/')
+  }
+  setTimeout(() => {
+    container.value.classList.replace('opacity-0','opacity-1')
+  }, 50);
+})
 
 const redirectToForgetPass = () =>{
   router.push('/auth/forgetpass')
 }
 
 const redirectToRegister = () =>{
-  router.push('/auth/register')
+  container.value.classList.replace('opacity-1','opacity-0')
+  setTimeout(() => {
+    router.push('/auth/register')
+  }, 50);
+}
+
+const redirectToHome = () =>{
+  router.push('/')
 }
 
 const login = () =>{
-  userStore.setRoles('User')
-  userStore.setToken('TestishToken')
   localStorage.setItem('token','TestishToken')
   router.push('/')
 }
+
 </script>
 
 <template>
   <div class="bg-[#6e74c5] h-screen p-5 px-10 flex items-center justify-center">
-    <div class="bg-[#4951c2] rounded-xl h-[60vh] w-full flex items-center">
+    <div class="bg-[#4951c2] rounded-xl h-[60vh] w-full flex items-center opacity-0 transition-all" ref="container">
       <div class="w-1/2">
         <img :src="hero" alt="hero" class="max-w-[500px] mx-auto h-full">
       </div>
-      <div class="bg-white w-1/2 h-full flex items-center justify-start p-10">
+      <div class="bg-white w-1/2 h-full flex items-center justify-start p-10 rounded-r-xl relative">
         <div class="ml-10 w-full">
+          <button class="absolute top-10 right-10" @click="redirectToHome"><img :src="arrowRight" alt="arrowRight"></button>
           <p class="font-bold text-[30px]">Login</p>
           <p class="mb-5">Welcome! TechiTech is ready to serve you any time.</p>
           <mm-input  placeholder="Username*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
-          <mm-input  placeholder="Password*" has-rule="true" class="w-full rounded-none border-[#4951c2] mt-10"></mm-input>
-          <div class="flex justify-between items-center">
+          <mm-input  placeholder="Password*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+          <div class="flex justify-between items-center mt-5">
             <div class="flex justify-center items-center gap-1">
               <input type="checkbox">
               <span>Remember Me</span>
@@ -55,8 +71,3 @@ const login = () =>{
     </div>
   </div>
 </template>
-
-
-<style>
-
-</style>

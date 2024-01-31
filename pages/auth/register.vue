@@ -1,6 +1,9 @@
 <script setup>
 import hero from "@/assets/svg/registerHero.svg"
+import arrowRight from "@/assets/svg/arrow-sm-right.svg"
 const router = useRouter()
+const user = UserStore()
+const container = ref()
 const newUser = reactive({
   firstName:'',
   lastName:'',
@@ -12,13 +15,32 @@ onMounted(()=>{
   if(localStorage.getItem('token')){
     router.push('/')
   }
+  setTimeout(()=>{
+    container.value.classList.replace('opacity-0','opacity-1')
+  },50)
 })
 
 const redirectToLogin = () =>{
-  router.push('/auth/login')
+  container.value.classList.replace('opacity-1','opacity-0')
+  setTimeout(()=>{
+    router.push('/auth/login')
+  },50)
+}
+
+const redirectToHome = () =>{
+  router.push('/')
 }
 
 const register = () =>{
+  if(
+      newUser.firstName.length == 0 ||
+      newUser.lastName.length == 0 ||
+      newUser.password.length == 0 ||
+      newUser.userName.length == 0
+    ){
+    return
+  }
+  user.setToken('TestishToken')
   localStorage.setItem('token','TestishToken')
   localStorage.setItem('user',JSON.stringify(newUser))
   router.push('/')
@@ -27,12 +49,13 @@ const register = () =>{
 
 <template>
   <div class="bg-[#6e74c5] h-screen p-5 px-10 flex items-center justify-center">
-    <div class="bg-[#4951c2] rounded-xl h-[70vh] w-full flex items-center">
+    <div class="bg-[#4951c2] rounded-xl h-[70vh] w-full flex items-center opacity-0 transition-all" ref="container">
       <div class="w-1/2">
         <img :src="hero" alt="hero" class="max-w-[500px] mx-auto h-full">
       </div>
-      <div class="bg-white w-1/2 h-full flex items-center justify-start p-10">
+      <div class="bg-white w-1/2 h-full flex items-center justify-start p-10 rounded-r-xl relative">
         <div class="ml-10">
+          <button class="absolute top-10 right-10" @click="redirectToHome"><img :src="arrowRight" alt="arrowRight"></button>
           <form @submit.prevent="register">
             <p class="font-bold text-[30px]">Sign Up</p>
             <p class="my-3">TechiTech is insures you <strong>Best</strong> product at <strong>Lowest</strong> cost. <strong>Safety</strong> and our customer <strong>Fast delivery</strong> is our purpose.</p>
