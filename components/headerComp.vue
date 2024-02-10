@@ -19,11 +19,16 @@ import exit from "@/assets/svg/exit.svg"
 const route = useRoute()
 const router = useRouter()
 const userStore = UserStore()
+const userDropDown = ref()
 const sidebar = ref()
 const overLay = ref()
 const state = reactive({
   logedin:false,
   isSidebarOpen:false,
+})
+
+const isUserDropDown = reactive({
+  value:false,
 })
 
 const social = reactive({
@@ -100,6 +105,9 @@ const logout = () =>{
   state.logedin = false
 }
 
+const openUserDropDown = () =>{
+  isUserDropDown.value = !isUserDropDown.value
+}
 
 </script>
 
@@ -158,14 +166,14 @@ const logout = () =>{
             <span v-if="state.user" class="bg-[#f00] w-2 h-2 rounded-full absolute -top-0 -right-0"></span>
           </button>
 
-          <button type="button" class="w-full relative hidden lg:block" @click="">
+          <button type="button" class="w-full relative hidden lg:block" @click="openUserDropDown">
             <div class="text-[#aaa] w-full text-start">Mohammad Mahdavi</div>
             <div class="flex justify-start items-center">
               <span class="font-bold">My Account</span>
               <span><img :src="arrowDown" alt="arrowDown"></span> 
             </div>
 
-            <div class="absolute top-14 left-0 bg-white shadow w-full border z-10 rounded gap-5">
+            <div class="absolute top-14 left-0 bg-white shadow w-full border z-10 rounded gap-5 transition-all ease-in-out" :class="isUserDropDown.value ? 'opacity-0' : 'opacity-1'" ref="userDropDown">
               <button type="button" class="hover:bg-gray-300 w-full p-3 px-5 flex gap-1 justify-start items-center" @click="logout"><img :src="exit" alt="exit">Logout</button>
             </div>
           </button>
