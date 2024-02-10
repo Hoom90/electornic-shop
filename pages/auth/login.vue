@@ -3,6 +3,13 @@ import hero from "@/assets/svg/loginHero.svg"
 import arrowRight from "@/assets/svg/arrow-sm-right.svg"
 const router = useRouter()
 const container = ref()
+const usernameInput = ref()
+const passwordInput = ref()
+const newUser = reactive({
+  userName:null,
+  password:null,
+})
+
 onMounted(()=>{
   if(localStorage.getItem('token')){
     router.push('/')
@@ -28,6 +35,11 @@ const redirectToHome = () =>{
 }
 
 const login = () =>{
+  if(!newUser.userName || !newUser.password){
+    usernameInput.value.validate()
+    passwordInput.value.validate()
+    return
+  }
   localStorage.setItem('token','TestishToken')
   router.push('/')
 }
@@ -45,8 +57,8 @@ const login = () =>{
           <button class="absolute top-10 right-10" @click="redirectToHome"><img :src="arrowRight" alt="arrowRight"></button>
           <p class="font-bold text-[30px]">Login</p>
           <p class="mb-5">Welcome! TechiTech is ready to serve you any time.</p>
-          <mm-input  placeholder="Username*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
-          <mm-input  placeholder="Password*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+          <mm-input ref="usernameInput" v-model="newUser.userName" placeholder="Username*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+          <mm-input ref="passwordInput" v-model="newUser.password" type="password" placeholder="Password*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
           <div class="flex justify-between items-center mt-5">
             <div class="flex justify-center items-center gap-1">
               <input type="checkbox">
