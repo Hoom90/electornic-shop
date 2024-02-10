@@ -1,8 +1,9 @@
 <script setup>
-const props = defineProps(['placeholder','class','modelValue','hasRule','errorText'])
+const props = defineProps(['placeholder','class','modelValue','hasRule','errorText','type'])
 const emits = defineEmits(['update:modelValue'])
 
 const text = ref(props.modelValue)
+const type = ref(props.type)
 const error = ref()
 const container = ref()
 const placeholder = ref()
@@ -16,7 +17,7 @@ onMounted(()=>{
 
 const validate = () =>{
   if(props.hasRule){
-    if(text.value.length <= 0){
+    if(!text.value){
       error.value.classList.replace('opacity-0','opacity-1')
       container.value.classList.replace('border-gray-300','border-red-500')
       container.value.classList.replace('mb-0','mb-10')
@@ -33,11 +34,14 @@ const validate = () =>{
   }
 }
 
+defineExpose({
+  validate
+})
 
 </script>
 <template>
   <div ref="container" class="border border-gray-300 rounded relative flex justify-start items-center p-3 mt-3 bg-white font-sans cursor-text my-auto mb-0 transition-all" @click="input.focus()" :class="props.class">
-    <input ref="input" type="text" :id="props.placeholder" class="w-full outline-none bg-transparent" @input="emits('update:modelValue', text)" v-model="text" @blur="validate">
+    <input ref="input" :type="type ?? 'text'" :id="props.placeholder" class="w-full outline-none bg-transparent" @input="emits('update:modelValue', text)" v-model="text" @blur="validate">
     <label ref="placeholder" :for="props.placeholder" id="label" @click="input.focus()" class="absolute bg-white px-1 text-gray-300 transition-all ease-in-out translate-y-0 cursor-text">{{props.placeholder}}</label>
     <label ref="error" v-if="props.hasRule" class="absolute text-red-500 -bottom-6 opacity-0 transition-all ease-in-out text-sm">{{ props.errorText ?? 'Incorrect Value!' }}</label>
   </div>
