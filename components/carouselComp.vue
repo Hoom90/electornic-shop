@@ -7,6 +7,7 @@ const slider = ref(null)
 const slides = ref(null)
 const slide = (index) => {
   currentIndex.value = index;
+  if(slider.value)
   slider.value.style.transform = `translateX(${index * - (100/props.data.length)}%)`;
 };
 
