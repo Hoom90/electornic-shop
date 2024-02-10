@@ -4,6 +4,10 @@ import arrowRight from "@/assets/svg/arrow-sm-right.svg"
 const router = useRouter()
 const user = UserStore()
 const container = ref()
+const firstNameInput = ref()
+const lastNameInput = ref()
+const userNameInput = ref()
+const passwordInput = ref()
 const newUser = reactive({
   firstName:'',
   lastName:'',
@@ -38,6 +42,10 @@ const register = () =>{
       newUser.password.length == 0 ||
       newUser.userName.length == 0
     ){
+    firstNameInput.value.validate()
+    lastNameInput.value.validate()
+    userNameInput.value.validate()
+    passwordInput.value.validate()
     return
   }
   user.setToken('TestishToken')
@@ -59,10 +67,10 @@ const register = () =>{
           <form @submit.prevent="register">
             <p class="font-bold text-[30px]">Sign Up</p>
             <p class="my-3">TechiTech is insures you <strong>Best</strong> product at <strong>Lowest</strong> cost. <strong>Safety</strong> and our customer <strong>Fast delivery</strong> is our purpose.</p>
-            <mm-input v-model="newUser.firstName" placeholder="FirstName*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
-            <mm-input v-model="newUser.lastName" placeholder="LastName*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
-            <mm-input v-model="newUser.userName" placeholder="UserName*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
-            <mm-input v-model="newUser.password" placeholder="Password*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+            <mm-input ref="firstNameInput" v-model="newUser.firstName" placeholder="FirstName*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+            <mm-input ref="lastNameInput" v-model="newUser.lastName" placeholder="LastName*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+            <mm-input ref="userNameInput" v-model="newUser.userName" placeholder="UserName*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
+            <mm-input ref="passwordInput" v-model="newUser.password" type="password" placeholder="Password*" has-rule="true" class="w-full rounded-none border-[#4951c2]"></mm-input>
             <div class="flex justify-center items-center gap-3 my-5 mt-10">
               <button type="submit" class="p-1 bg-[#4951c2] text-white hover:bg-[#5c63c7] transition-all w-1/2 border border-[#4951c2] h-[40px]">Signup</button>
               <button type="button" class="p-1 border border-[#4951c2] text-[#4951c2] hover:bg-[#4951c2] hover:text-white transition-all w-1/2 h-[40px]" @click="redirectToLogin">Login</button>
