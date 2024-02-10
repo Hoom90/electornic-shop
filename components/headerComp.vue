@@ -118,7 +118,7 @@ const logout = () =>{
   </div>
   <hr>
   <div class="mx-auto max-w-[1440px] text-wrap p-5">
-    <div class="flex justify-between h-[50px]">
+    <div class="flex flex-wrap gap-3 justify-between h-[50px]">
 
       <div class="flex justify-center items-center gap-5 h-full">
         <img :src="menu" alt="menu" class="cursor-pointer" @click="openSidebar">
@@ -127,7 +127,7 @@ const logout = () =>{
         </NuxtLink>
       </div>
 
-      <div class="flex justify-center items-center h-full">
+      <div class="justify-center items-center h-full hidden md:flex">
 
         <div class="flex justify-center items-center rounded bg-[#eee] h-full px-5">
           <input type="text" placeholder="Search something ..." class="bg-transparent tracking-tighter outline-none">
@@ -143,22 +143,22 @@ const logout = () =>{
       <div class="flex justify-center items-center gap-3 h-full">
         
         <div class="flex justify-center items-center gap-3" v-if="state.logedin">
-          <button type="button" class="border rounded-full w-[50px] aspect-square flex items-center justify-center bg-white relative">
+          <button type="button" class="border rounded-full w-[40px] sm:w-[30px] aspect-square flex items-center justify-center bg-white relative">
             <img :src="cart" alt="cart">
             <span v-if="state.cart" class="bg-[#f00] w-2 h-2 rounded-full absolute -top-0 -right-0"></span>
           </button>
 
-          <button type="button" class="border rounded-full w-[50px] aspect-square flex items-center justify-center bg-white relative">
+          <button type="button" class="border rounded-full w-[40px] sm:w-[30px] aspect-square flex items-center justify-center bg-white relative">
             <img :src="favovite" alt="favovite">
             <span v-if="state.favovite" class="bg-[#f00] w-2 h-2 rounded-full absolute -top-0 -right-0"></span>
           </button>
 
-          <button type="button" class="border rounded-full w-[50px] aspect-square flex items-center justify-center bg-white relative">
+          <button type="button" class="border rounded-full w-[40px] sm:w-[30px] aspect-square flex items-center justify-center bg-white relative">
             <img :src="user" alt="user">
             <span v-if="state.user" class="bg-[#f00] w-2 h-2 rounded-full absolute -top-0 -right-0"></span>
           </button>
 
-          <button type="button" class="w-full relative" @click="">
+          <button type="button" class="w-full relative hidden lg:block" @click="">
             <div class="text-[#aaa] w-full text-start">Mohammad Mahdavi</div>
             <div class="flex justify-start items-center">
               <span class="font-bold">My Account</span>

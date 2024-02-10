@@ -165,10 +165,10 @@ const addToFav = (id) =>{
     <div class="bg-gray-100">
       <carouselComp :data="state.slides"></carouselComp>
     </div>
-    <div class="flex items-center justify-around p-10">
-      <div class="flex justify-center items-center gap-5" v-for="item in state.services">
-        <img :src="item.image" :alt="item.image">
-        <div>
+    <div class="flex-row md:flex items-center justify-around p-10">
+      <div class="flex-row md:flex justify-center items-center gap-5 my-5 md:my-0" v-for="item in state.services">
+        <img :src="item.image" :alt="item.image" class="mx-auto">
+        <div class="text-center md:text-start">
           <p class="font-bold">{{ item.title }}</p>
           <p class="text-gray-500">{{ item.summary }}</p>
         </div>
@@ -225,8 +225,8 @@ const addToFav = (id) =>{
 
   <section class="p-10 mb-20">
     <div class="p-5">
-      <div class="flex justify-center gap-10 bg-[#e6f1f8] rounded p-10">
-        <img :src="TopProduct" alt="TopProduct">
+      <div class="flex-row lg:flex justify-center gap-10 bg-[#e6f1f8] rounded p-10">
+        <img :src="TopProduct" alt="TopProduct" class="mx-auto aspect-square my-auto">
         <div class="mt-0">
           <p class="text-emerald-500 font-bold text-[12px]">FLASH SALE 7.7.7</p>
           <p class="font-bold text-[30px] my-5">Lenovo Yoga X</p>
@@ -237,12 +237,12 @@ const addToFav = (id) =>{
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae eveniet necessitatibus rem! Eos ipsam a modi ipsum accusantium excepturi tempore temporibus dolorum, ut nam corporis fugiat dolorem molestias, commodi iure?
           </p>
-          <div class=" mt-5 flex justify-start items-center gap-1">
-              <button type="button" class="flex justify-center items-center gap-1 bg-blue-600 rounded p-1 px-10 text-white hover:bg-blue-700 transition-all">
+          <div class="mt-5 flex-row md:flex justify-start items-center gap-1">
+              <button type="button" class="flex justify-center items-center gap-1 bg-blue-600 rounded p-1 px-10 text-white hover:bg-blue-700 transition-all mx-auto mb-1 md:mx-0 md:mb-0">
                 <img :src="cart" alt="cart">
                 <p>Add to cart</p>
               </button>
-              <button type="button" class="flex justify-center items-center gap-1 border rounded p-1 px-10 bg-white text-gray-400 hover:border-gray-400">
+              <button type="button" class="flex justify-center items-center gap-1 border rounded p-1 px-10 bg-white text-gray-400 hover:border-gray-400 mx-auto md:mx-0">
                 <img :src="eye" alt="eye">
                 <p>Quick view</p>  
               </button>
