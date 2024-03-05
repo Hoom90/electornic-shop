@@ -161,6 +161,15 @@ const addToFav = (id) =>{
 
 <template>
 
+  <!-- <div class="btn">
+    <div class="img">
+      <img :src="star" alt="">
+    </div>
+    <div class="div">
+      <p>delete</p>
+    </div>
+  </div> -->
+
   <section>
     <div class="bg-gray-100">
       <carouselComp :data="state.slides"></carouselComp>
@@ -254,4 +263,39 @@ const addToFav = (id) =>{
 </template>
 
 <style scoped>
+.btn{
+  position: relative;
+  color: white;
+  height: 80px;
+  width: 100px;
+  overflow: hidden;
+}
+.btn .img{
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn .div{
+  top: 0;
+  left: 150px;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: blue;
+  transition: .5s all ease-in-out;
+  transform: scale(1.2);
+}
+.btn:hover .div{
+  background-color: rebeccapurple;
+  left: 0;
+}
 </style>
